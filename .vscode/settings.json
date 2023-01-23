@@ -1,0 +1,12 @@
+{
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript"
+  ],
+  "search.exclude": {
+    "**/node_modules": false
+  },
+  "task.allowAutomaticTasks": "on"
+}
+  

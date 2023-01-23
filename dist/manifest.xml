@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xsi:type="MailApp">
+  <Id>0a9e0f68-13be-4030-8ac4-e8c6f64de2e2</Id>
+  <Version>1.0.0.1</Version>
+  <ProviderName>Drei AUstriaGmbH</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="OutlookSignature"/>
+  <Description DefaultValue="Outlook Addin to help Drei Employee to create and save Outlook Signature"/>
+  <IconUrl DefaultValue="https://localhost:3000/assets/DreiLogo-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/DreiLogo_small.png"/>
+  <SupportUrl DefaultValue="https://localhost.office.com/mail/"/>
+  <AppDomains>
+    <AppDomain>https://localhost</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+  <Requirements>
+    <Sets>
+      <Set Name="MailBox" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://localhost:3000/index.html"/>
+        <RequestedHeight>250</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+  <Permissions>ReadWriteItem</Permissions>
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+    <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Read"/>
+  </Rule>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+      <Hosts>
+        <Host xsi:type="MailHost">
+
+          <Runtimes>
+            <Runtime resid="Autorun">
+              <Override type="javascript" resid="runtimeJs"/>
+            </Runtime>
+          </Runtimes>
+
+          <DesktopFormFactor>
+            <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+              <OfficeTab id="TabHome">
+                <Group id="CommandsGroup">
+                  <Label resid="CommandsGroup.Label"/>
+                  <Control xsi:type="Button" id="TaskpaneButton">
+                    <Label resid="TaskpaneButton.Label"/>
+                    <Supertip>
+                      <Title resid="TaskpaneButton.Label"/>
+                      <Description resid="TaskpaneButton.Tooltip"/>
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16"/>
+                      <bt:Image size="32" resid="Icon.32x32"/>
+                      <bt:Image size="80" resid="Icon.80x80"/>
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <SourceLocation resid="Taskpane.Url"/>
+                    </Action>
+                  </Control>
+                </Group>
+              </OfficeTab>
+            </ExtensionPoint>
+            <ExtensionPoint xsi:type="LaunchEvent">
+              <LaunchEvents>
+                <LaunchEvent Type="OnNewMessageCompose" FunctionName="checkSignature" />
+                <LaunchEvent Type="OnNewAppointmentOrganizer" FunctionName="checkSignature" />
+              </LaunchEvents>
+              <SourceLocation resid="Autorun" />
+            </ExtensionPoint>
+          </DesktopFormFactor>
+        </Host>
+      </Hosts>
+      <Resources>
+        <bt:Images>
+          <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/DreiLogo-16.png"/>
+          <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/DreiLogo-32.png"/>
+          <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/DreiLogo-80.png"/>
+        </bt:Images>
+        <bt:Urls>
+          <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html"/>
+          <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
+          <bt:Url id="residUrl0" DefaultValue="https://localhost:3000/taskpane.html"></bt:Url>
+          <bt:Url id="Autorun" DefaultValue="https://localhost:3000/autorunweb.html"></bt:Url>
+          <bt:Url id="runtimeJs" DefaultValue="https://localhost:3000/autorunshared.js"></bt:Url>
+        
+        </bt:Urls>
+        <bt:ShortStrings>
+          <bt:String id="GetStarted.Title" DefaultValue="Start creating Outlook Signature"/>
+          <bt:String id="CommandsGroup.Label" DefaultValue="Commands Group"/>
+          <bt:String id="TaskpaneButton.Label" DefaultValue="Drei Signature Generator"/>
+          <bt:String id="residGL0" DefaultValue="Signature Injector"></bt:String>
+          <bt:String id="residStr0" DefaultValue="Set my signature"></bt:String>
+        </bt:ShortStrings>
+        <bt:LongStrings>
+          <bt:String id="GetStarted.Description" DefaultValue="Outlook Signature generator addin, click on Show Signature generator button and fill in the details, select a signature template and svae the Signature"/>
+          <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show Drei signature Generator App"/>
+          <bt:String id="residAppDesc" DefaultValue="Insert your signature in Outlook emails and appontments."></bt:String>
+          <bt:String id="residTT0" DefaultValue="Opens a pane displaying user information."></bt:String>
+      
+        </bt:LongStrings>
+      </Resources>
+      <WebApplicationInfo>
+        <Id>4e4435e2-9985-419c-891a-e45ba1869d26</Id>
+        <Resource>api://localhost:3000/4e4435e2-9985-419c-891a-e45ba1869d26</Resource>
+        <Scopes>
+          <Scope>User.Read</Scope>
+          <Scope>profile</Scope>
+          <Scope>Sites.ReadWrite.All</Scope>    
+        </Scopes>
+      </WebApplicationInfo>
+    </VersionOverrides>
+  </VersionOverrides>
+</OfficeApp>
